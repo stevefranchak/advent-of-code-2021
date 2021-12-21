@@ -24,6 +24,8 @@ dependencies {
 
     implementation("com.github.kittinunf.fuel:fuel:2.3.1")
     implementation("io.github.cdimascio:dotenv-kotlin:6.2.2")
+    // https://github.com/harawata/appdirs
+    implementation("net.harawata:appdirs:1.2.1")
 
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")
