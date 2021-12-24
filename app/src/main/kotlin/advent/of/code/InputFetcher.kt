@@ -3,7 +3,6 @@ package advent.of.code
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
 import java.io.File
-import kotlin.io.path.Path
 
 // I wish I were clever enough to come up with the structure of this - see: https://stackoverflow.com/a/68775013
 class InputFetchException(message: String? = null, cause: Throwable? = null) : Exception(message, cause) {
@@ -31,9 +30,9 @@ class InputFetcher(
 
     private fun fetchInputForDayFromSite(day: Int): String {
         val (_, _, result) = "https://adventofcode.com/2021/day/$day/input"
-                .httpGet()
-                .header(Pair("Cookie", "session=$adventOfCodeSessionToken"))
-                .responseString()
+            .httpGet()
+            .header(Pair("Cookie", "session=$adventOfCodeSessionToken"))
+            .responseString()
         when (result) {
             is Result.Failure -> {
                 throw InputFetchException(

@@ -29,12 +29,14 @@ fun main() {
 }
 
 private fun printException(exc: Exception) {
-    print(buildString {
-        appendLine(exc.message)
-        var cause = exc.cause
-        while (cause != null) {
-            appendLine("Caused by: ${cause.message}")
-            cause = cause.cause
+    print(
+        buildString {
+            appendLine(exc.message)
+            var cause = exc.cause
+            while (cause != null) {
+                appendLine("Caused by: ${cause.message}")
+                cause = cause.cause
+            }
         }
-    })
+    )
 }
