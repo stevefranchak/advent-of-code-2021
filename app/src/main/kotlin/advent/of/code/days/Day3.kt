@@ -8,8 +8,9 @@ class Day3 : IDay {
         val numBitsPerLine = input[0].length
         val bitCounter = MutableList(numBitsPerLine) { MutableList(2) { 0 } }
         input.forEach { bits ->
-            bits.forEachIndexed { index: Int, c: Char ->
-                bitCounter[index][c.digitToInt()]++
+            bits.forEachIndexed { index: Int, bit: Char ->
+                // Assumption: bit characters will only ever be '0' and '1'
+                bitCounter[index][bit.digitToInt()]++
             }
         }
 
