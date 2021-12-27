@@ -29,6 +29,37 @@ class Day3 : IDay {
     }
 
     override fun executeStar2(input: List<String>): Any {
-        return input
+        val oxygenGeneratorRating = deriveRating(input, BitCriteria.MOST_COMMON)
+        val co2ScrubberRating = deriveRating(input, BitCriteria.LEAST_COMMON)
+
+        return oxygenGeneratorRating * co2ScrubberRating
+    }
+
+    enum class BitCriteria {
+        MOST_COMMON,
+        LEAST_COMMON,
+    }
+
+    private fun deriveRating(input: List<String>, bitCriteria: BitCriteria, currentIndex: Int = 0): UInt {
+        if (input.size == 1) {
+            return input[0].toUInt(radix = 2)
+        }
+
+        val (startsWithZero, startsWithOne) = input.asSequence()
+            .map { Pair(it[currentIndex], it) }
+            .partition { it.first == '0' }
+
+        return deriveRating(
+            when (bitCriteria) {
+                BitCriteria.MOST_COMMON ->
+                    if (startsWithZero.size > startsWithOne.size) startsWithZero.map() else startsWithOne.map()
+                BitCriteria.LEAST_COMMON ->
+                    if (startsWithOne.size < startsWithZero.size) startsWithOne.map() else startsWithZero.map()
+            },
+            bitCriteria,
+            currentIndex + 1
+        )
     }
 }
+
+fun List<Pair<Char, String>>.map(): List<String> = this.map { it.second }
