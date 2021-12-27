@@ -27,6 +27,7 @@ dependencies {
     implementation("io.github.cdimascio:dotenv-kotlin:6.2.2")
     // https://github.com/harawata/appdirs
     implementation("net.harawata:appdirs:1.2.1")
+    implementation("com.github.ajalt.clikt:clikt:3.3.0")
 
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")

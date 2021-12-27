@@ -1,11 +1,14 @@
 package advent.of.code
 
 import advent.of.code.days.IDay
+import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.parameters.arguments.argument
+import com.github.ajalt.clikt.parameters.types.int
 import io.github.cdimascio.dotenv.dotenv
 import net.harawata.appdirs.AppDirsFactory
 import kotlin.system.exitProcess
 
-class App {
+class App : CliktCommand() {
     companion object {
         const val APP_NAME = "advent_of_code_runner"
         const val ADVENT_OF_CODE_YEAR = "2021"
@@ -14,10 +17,13 @@ class App {
         const val EXCEPTION_OCCURRED_EXIT_STATUS = 1
     }
 
+    private val day: Int by argument(help = "Which day to run").int()
+    private val star: Int by argument(help = "Which star to run within the given day").int()
+
     private val appDirs = AppDirsFactory.getInstance()
     private val dotenv = dotenv()
 
-    fun execute() {
+    override fun run() {
         val defaultCacheLocation = appDirs.getUserCacheDir(APP_NAME, ADVENT_OF_CODE_YEAR, null)
         val inputFetcher = InputFetcher(
             adventOfCodeSessionToken = dotenv.get(ADVENT_OF_CODE_SESSION_TOKEN_ENV_NAME),
@@ -27,11 +33,15 @@ class App {
         )
 
         try {
-            val day = 1
             val input = inputFetcher.getInputForDay(day)
             val clazz = this::class.java.classLoader.loadClass("advent.of.code.days.Day$day")
             val instance = clazz.getConstructor().newInstance() as IDay
-            instance.executeStar1(input)
+            val result = when (star) {
+                1 -> instance.executeStar1(input)
+                2 -> instance.executeStar2(input)
+                else -> "Invalid day provided"
+            }
+            println(result)
         } catch (exc: Exception) {
             printException(exc)
             exitProcess(EXCEPTION_OCCURRED_EXIT_STATUS)
@@ -52,6 +62,6 @@ class App {
     }
 }
 
-fun main() {
-    App().execute()
+fun main(args: Array<String>) {
+    App().main(args)
 }
