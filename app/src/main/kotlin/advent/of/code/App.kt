@@ -34,16 +34,19 @@ class App : CliktCommand() {
 
         try {
             val input = inputFetcher.getInputForDay(day)
-            val clazz = this::class.java.classLoader.loadClass("advent.of.code.days.Day$day")
-            val instance = clazz.getConstructor().newInstance() as IDay
+            val dayClass = this::class.java.classLoader.loadClass("advent.of.code.days.Day$day")
+            val dayInstance = dayClass.getConstructor().newInstance() as IDay
             val result = when (star) {
-                1 -> instance.executeStar1(input)
-                2 -> instance.executeStar2(input)
-                else -> "Invalid day provided"
+                1 -> dayInstance.executeStar1(input)
+                2 -> dayInstance.executeStar2(input)
+                else -> "Invalid star \"$star\" provided. Exiting."
             }
             println(result)
         } catch (exc: Exception) {
-            printException(exc)
+            when (exc) {
+                is ClassNotFoundException -> println("No class file found for Day $day")
+                else -> printException(exc)
+            }
             exitProcess(EXCEPTION_OCCURRED_EXIT_STATUS)
         }
     }
