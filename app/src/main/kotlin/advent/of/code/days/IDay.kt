@@ -1,7 +1,12 @@
 package advent.of.code.days
 
 interface IDay {
-    fun executeStar1(input: List<String>): Any
+    // Spit back input as default implementation
+    fun executeStar1(input: List<String>): Any {
+        return input
+    }
 
-    fun executeStar2(input: List<String>): Any
+    fun executeStar2(input: List<String>): Any {
+        return input
+    }
 }
