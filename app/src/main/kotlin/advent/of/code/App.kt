@@ -34,8 +34,8 @@ class App : CliktCommand() {
 
         try {
             val input = inputFetcher.getInputForDay(day)
-            val dayClass = this::class.java.classLoader.loadClass("advent.of.code.days.Day$day")
-            val dayInstance = dayClass.getConstructor().newInstance() as IDay
+            val dayClass = Class.forName("advent.of.code.days.Day$day")
+            val dayInstance = dayClass.getDeclaredConstructor().newInstance() as IDay
             val result = when (star) {
                 1 -> dayInstance.executeStar1(input)
                 2 -> dayInstance.executeStar2(input)
