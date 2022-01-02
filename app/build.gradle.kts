@@ -36,6 +36,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.2")
 
     testImplementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.1")
+    testImplementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.1")
 }
 
 application {

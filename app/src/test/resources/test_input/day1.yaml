@@ -9,7 +9,5 @@ input: |
   269
   260
   263
-results:
-  day1: 7
-  day2: 5
+results: [7, 5]
 name: Day 1 - Example Input
