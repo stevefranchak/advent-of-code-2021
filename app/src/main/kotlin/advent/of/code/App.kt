@@ -14,6 +14,9 @@ class App : CliktCommand() {
         const val ADVENT_OF_CODE_SESSION_TOKEN_ENV_NAME = "SESSION_TOKEN"
         const val CACHE_INPUT_FILES_LOCATION_ENV_NAME = "CACHE_INPUT_FILES_LOCATION"
         const val EXCEPTION_OCCURRED_EXIT_STATUS = 1
+
+        const val ROOT_ERROR_MSG_PREFIX = "Root error"
+        const val NONROOT_ERROR_MSG_PREFIX = "Caused by"
     }
 
     private val day: Int by argument(help = "Which day to run").int()
@@ -41,18 +44,22 @@ class App : CliktCommand() {
         }
     }
 
-    private fun printException(exc: Exception) {
+    private fun printException(exception: Throwable) {
         print(
             buildString {
-                appendLine(exc.message)
-                var cause = exc.cause
+                appendLine(formatExceptionMessage(exception, isRootError = true))
+                var cause = exception.cause
                 while (cause != null) {
-                    appendLine("Caused by: ${cause.message}")
+                    appendLine(formatExceptionMessage(cause))
                     cause = cause.cause
                 }
             }
         )
     }
+
+    private fun formatExceptionMessage(exception: Throwable, isRootError: Boolean = false): String =
+        "${if (isRootError) ROOT_ERROR_MSG_PREFIX else NONROOT_ERROR_MSG_PREFIX}:\t[${exception::class.qualifiedName}]" +
+            " ${exception.message}"
 }
 
 fun main(args: Array<String>) {
