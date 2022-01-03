@@ -1,4 +1,4 @@
-input: |
+input: |-
   forward 5
   down 5
   forward 8
@@ -7,3 +7,4 @@ input: |
   forward 2
 results: [150, 900]
 name: Day 2 - Example Input
+day: 2

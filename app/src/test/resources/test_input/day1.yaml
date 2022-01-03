@@ -1,4 +1,4 @@
-input: |
+input: |-
   199
   200
   208
@@ -11,3 +11,4 @@ input: |
   263
 results: [7, 5]
 name: Day 1 - Example Input
+day: 1

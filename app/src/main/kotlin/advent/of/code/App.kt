@@ -1,6 +1,5 @@
 package advent.of.code
 
-import advent.of.code.days.IDay
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.types.int
@@ -34,19 +33,10 @@ class App : CliktCommand() {
 
         try {
             val input = inputFetcher.getInputForDay(day)
-            val dayClass = Class.forName("advent.of.code.days.Day$day")
-            val dayInstance = dayClass.getDeclaredConstructor().newInstance() as IDay
-            val result = when (star) {
-                1 -> dayInstance.executeStar1(input)
-                2 -> dayInstance.executeStar2(input)
-                else -> "Invalid star \"$star\" provided. Exiting."
-            }
+            val result = executeDayByStar(day, star, input)
             println(result)
         } catch (exc: Exception) {
-            when (exc) {
-                is ClassNotFoundException -> println("No class file found for Day $day")
-                else -> printException(exc)
-            }
+            printException(exc)
             exitProcess(EXCEPTION_OCCURRED_EXIT_STATUS)
         }
     }

@@ -34,6 +34,7 @@ dependencies {
     // Use the Kotlin JUnit integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.2")
+    testImplementation("org.assertj:assertj-core:3.21.0")
 
     testImplementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.1")
     testImplementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.1")
