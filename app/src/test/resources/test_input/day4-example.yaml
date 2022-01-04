@@ -18,6 +18,6 @@ input: |-
   18  8 23 26 20
   22 11 13  6  5
    2  0 12  3  7
-results: [4512, null]
+results: [4512, 1924]
 name: Day 4 - Example Input
 day: 4

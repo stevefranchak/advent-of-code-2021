@@ -2,6 +2,7 @@ package advent.of.code.days
 
 import kotlin.math.pow
 
+@Suppress("unused")
 class Day3 : IDay {
     override fun executeStar1(input: List<String>): Any {
         // Assumption: each bitstring has the same length

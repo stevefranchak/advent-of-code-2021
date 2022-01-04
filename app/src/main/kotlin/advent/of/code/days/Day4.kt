@@ -2,6 +2,7 @@ package advent.of.code.days
 
 private val SUBSEQUENT_WHITESPACE_REGEX = """\s+""".toRegex()
 
+@Suppress("unused")
 class Day4 : IDay {
 
     override fun executeStar1(input: List<String>): Any {

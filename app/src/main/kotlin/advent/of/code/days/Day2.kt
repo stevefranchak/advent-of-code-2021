@@ -1,5 +1,6 @@
 package advent.of.code.days
 
+@Suppress("unused")
 class Day2 : IDay {
     override fun executeStar1(input: List<String>): Any {
         var depth = 0
